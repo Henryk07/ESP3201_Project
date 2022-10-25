@@ -24,3 +24,11 @@ S_prediction_datas_labels_bw means with label and in black and write for predict
 S_testing_datas_labels means with label not combined train and test together
 
 S_training_datas_labels means with label not combined train and test together
+
+### Model
+
+model_20E_fulldata.h5 means model trained with 20 epochs and full dataset
+
+model_test_smalldata.h5 means model trained with 20 epochs and small dataset
+
+model_20E_6_4.h5 means model trained with 20 epochs and 60% for training 40% for testing
