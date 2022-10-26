@@ -31,6 +31,6 @@ model_20E_fulldata.h5 means model trained with 20 epochs and full dataset
 
 model_test_smalldata.h5 means model trained with 20 epochs and small dataset
 
-model_20E_6_4.h5 means model trained with 20 epochs and 60% for training 40% for testing
+model_20E_6_4_bw.h5 means model trained with 20 epochs and 60% for training 40% for testing(black and white)
 
-model_test_smalldata_bw.h5 means model trained with 20 epochs and small bw dataset, 80% for training 20% for testing 
+model_test_smalldata_bw.h5 means model trained with 20 epochs and small bw dataset, 80% for training 20% for testing
