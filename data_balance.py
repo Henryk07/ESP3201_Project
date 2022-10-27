@@ -45,4 +45,4 @@ def balancedatas(n, directorypath, sourcedirectory):  # enter source directory
 # first argument : number of images in each category (should be 803)
 # second argument : location of the new directory
 # third argument : location of the source directory (including the parent directory)
-balancedatas(803, "M_dataset", "Full_dataset/ECG_Image_data_cb_bw")
+balancedatas(2000, "M_dataset", "Full_dataset/ECG_Image_data_cb_bw")
