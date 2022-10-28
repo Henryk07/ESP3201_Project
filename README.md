@@ -36,3 +36,5 @@ model_20E_6_4_bw.h5 means model trained with 20 epochs and 60% for training 40% 
 model_test_smalldata_bw.h5 means model trained with 20 epochs and small bw dataset, 80% for training 20% for testing
 
 model_50E_8_2_bw.h5 means model trained with 50 epochs and 80% for training 20% for testing(black and white)
+
+model_new_20E_8_2_bw.h5 means model trained with 20 epochs and 80% for training 20% for testing(black and white) with high accuracy!!
