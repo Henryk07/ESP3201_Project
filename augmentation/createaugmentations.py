@@ -52,6 +52,7 @@ def augmentationdata(n, directorypath, sourcedirectory):  # enter source directo
             
             #Converting back the image to an array to be saved
             augarray=Image.fromarray(augmentedimg.astype('uint8'), 'RGB')
+            augarray=augarray.convert('L') #convert to black and white
 
             #Name of the image processing
             imgname = os.path.normpath(img_path_list[ran])
@@ -66,4 +67,4 @@ def augmentationdata(n, directorypath, sourcedirectory):  # enter source directo
 # first argument : number of images in each category (should be 803)
 # second argument : location of the new directory
 # third argument : location of the source directory (including the parent directory)
-augmentationdata(50, "Small_dataset", "Small_dataset/S_training_datas_labels")
+augmentationdata(50, "Small_dataset", "Small_dataset/S_datas_labels_cb_bw")
