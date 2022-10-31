@@ -29,13 +29,26 @@ def augmentationdata(n, directorypath, sourcedirectory):  # enter source directo
         nb_images = len(img_path_list)
         img_path_list_dest = []
         print(dirlab)
-
-        for i in range(len(img_path_list)): #copy all existing images to new directory
-            img = Image.open(img_path_list[i])
-            imgname = os.path.normpath(img_path_list[i])
-            rootpath = os.path.basename(os.path.normpath(imgname))
-            img.save(directorypath+"/S_datas_labels_augmented"+str(n)+"/"+dirlab+"//"+rootpath)
-            img_path_list_dest = glob.glob(directorypath+"/S_datas_labels_augmented"+str(n)+"/"+dirlab+"/*.png")
+        randused=[]
+        if (len(img_path_list))>n:
+            i=0
+            while i<int(abs(n/2)):
+                ran = random.randrange(nb_images)
+                if img_path_list[ran] not in randused:
+                    randused.append(img_path_list[ran])
+                    i+=1
+                    img = Image.open(img_path_list[ran])
+                    imgname = os.path.normpath(img_path_list[ran])
+                    rootpath = os.path.basename(os.path.normpath(imgname))
+                    img.save(directorypath+"/S_datas_labels_augmented"+str(n)+"/"+dirlab+"//"+rootpath)
+                    img_path_list_dest = glob.glob(directorypath+"/S_datas_labels_augmented"+str(n)+"/"+dirlab+"/*.png")
+        else:
+            for i in range(len(img_path_list)): #copy all existing images to new directory
+                img = Image.open(img_path_list[i])
+                imgname = os.path.normpath(img_path_list[i])
+                rootpath = os.path.basename(os.path.normpath(imgname))
+                img.save(directorypath+"/S_datas_labels_augmented"+str(n)+"/"+dirlab+"//"+rootpath)
+                img_path_list_dest = glob.glob(directorypath+"/S_datas_labels_augmented"+str(n)+"/"+dirlab+"/*.png")
         j=0
         while len(img_path_list_dest) != n: #complete new directory with augmented images 
             j+=1 #reference of the augmentation
@@ -67,4 +80,4 @@ def augmentationdata(n, directorypath, sourcedirectory):  # enter source directo
 # first argument : number of images in each category (should be 803)
 # second argument : location of the new directory
 # third argument : location of the source directory (including the parent directory)
-augmentationdata(50, "Small_dataset", "Small_dataset/S_datas_labels_cb_bw")
+augmentationdata(10, "Small_dataset", "Small_dataset/S_datas_labels_cb_bw")
