@@ -32,10 +32,11 @@ def modeltest(model, datatest):
     prediction = model.predict(datatest)
 
     classes = np.argmax(prediction, axis=1)
-    
+
     for i, clas in enumerate(classes):
         print(f"Image {i} || Predicted Disease : " +
               dict[clas] + " || True Disease : "+dict[labels_brut[i]])
+
 
 def confusionmatrix(model, datatest):
     predata = datatest.unbatch()
@@ -75,6 +76,8 @@ def testmodel(modelpath, color):
         confusionmatrix(model, simpledata)
 
 # generates test from model
+
+
 def directmodeltest(model, color):
 
     if color == True:
@@ -95,58 +98,57 @@ def directmodeltest(model, color):
         modeltest(model, predictdata)
         confusionmatrix(model, simpledata)
 
-#creates a single batch from one image
+# creates a single batch from one image
+
+
 def read_one_image(path):
 
     np_image = Image.open(path)
     np_image = np.array(np_image).astype('float32')/255
     np_image = transform.resize(np_image, (256, 256, 3))
     np_image = np.expand_dims(np_image, axis=0)
-    
-    label=os.path.dirname(path)[-1]
-    lab=0
 
-    if label=="F":
-        lab=0
-    elif label=="M":
-        lab=1
-    elif label=="N":
-        lab=2
-    elif label=="Q":
-        lab=3
-    elif label=="S":
-        lab=4
+    label = os.path.dirname(path)[-1]
+    lab = 0
+
+    if label == "F":
+        lab = 0
+    elif label == "M":
+        lab = 1
+    elif label == "N":
+        lab = 2
+    elif label == "Q":
+        lab = 3
+    elif label == "S":
+        lab = 4
     else:
-        lab=5
-    return (np_image,lab)
+        lab = 5
+    return (np_image, lab)
 
-def create_list_of_predictions(modelpath,datas):
+
+def create_list_of_predictions(modelpath, datas):
     model = tf.keras.models.load_model(modelpath)
-    #save the name of the model for the confusion matrix save
-    modelname=os.path.basename(modelpath)
-    modelname=modelname[:-3]
+    # save the name of the model for the confusion matrix save
+    modelname = os.path.basename(modelpath)
+    modelname = modelname[:-3]
 
-    #list of images from the validation data
+    # list of images from the validation data
     file_paths = datas.file_paths
-    listofimages=[]
+    listofimages = []
 
-    #list of useful labels
-    listoftruelabels=[]
-    listofpredictions=[]
+    # list of useful labels
+    listoftruelabels = []
+    listofpredictions = []
     for path in file_paths:
-        process=read_one_image(path)
+        process = read_one_image(path)
         listofimages.append(process[0])
         listoftruelabels.append(process[1])
-        pred=model.predict(process[0],verbose=0)
-        classe=np.argmax(pred, axis=1)
+        pred = model.predict(process[0], verbose=0)
+        classe = np.argmax(pred, axis=1)
         listofpredictions.append(classe[0])
 
-    matrix=ConfusionMatrixDisplay.from_predictions(listofpredictions,listoftruelabels,display_labels=["F","M","N","Q","S","V"])
-    matrix.figure_.savefig("plots/conf_matrix_"+modelname+".png")
-    report=sk.classification_report(listofpredictions,listoftruelabels)
+    matrix = ConfusionMatrixDisplay.from_predictions(
+        listofpredictions, listoftruelabels, display_labels=["F", "M", "N", "Q", "S", "V"])
+    matrix.figure_.savefig("pictures/conf_matrix_"+modelname+".png")
+    report = sk.classification_report(listofpredictions, listoftruelabels)
     print(report)
-
-
-    
-    
-
