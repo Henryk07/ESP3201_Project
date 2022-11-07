@@ -75,6 +75,14 @@ def testmodel(modelpath, color):
         modeltest(model, predictdata)
         confusionmatrix(model, simpledata)
 
+
+def testmodeldemo(modelpath, directorypath):
+    model = tf.keras.models.load_model(modelpath)
+
+    predictdata = tf.keras.utils.image_dataset_from_directory(
+        directorypath, shuffle=False, batch_size=5)
+
+    modeltest(model, predictdata)
 # generates test from model
 
 
