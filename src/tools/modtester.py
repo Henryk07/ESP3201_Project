@@ -68,9 +68,9 @@ def testmodel(modelpath, color):
 
     else:
         simpledata = tf.keras.utils.image_dataset_from_directory(
-            "src/data/Small_dataset/S_datas_labels_cb_bw", shuffle=False, batch_size=5)
+            "data/Small_dataset/S_datas_labels_cb_bw", shuffle=False, batch_size=5)
         predictdata = tf.keras.utils.image_dataset_from_directory(
-            "src/data/Small_dataset/S_prediction_datas_labels_bw", shuffle=False, batch_size=5)
+            "data/Small_dataset/S_prediction_datas_labels_bw", shuffle=False, batch_size=5)
 
         modeltest(model, predictdata)
         confusionmatrix(model, simpledata)
